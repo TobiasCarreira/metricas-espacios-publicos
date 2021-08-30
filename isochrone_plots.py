@@ -1,10 +1,12 @@
 import osmnx as ox
+import networkx as nx
+from networkx.classes.multidigraph import MultiDiGraph
 
 class IsochronePlots:
-    def __init__(self, trip_times):
+    def __init__(self, trip_times: list):
         self.trip_times = trip_times
     
-    def colors(self):
+    def colors(self) -> list:
         self.colors = ox.plot.get_colors(
             n=len(self.trip_times),
             cmap="plasma",
@@ -12,9 +14,9 @@ class IsochronePlots:
             return_hex=True)
         return self.colors
 
-    def plot_node_isochrones(self):
+    def plot_node_isochrones(self,G: MultiDiGraph ,center_node: int) -> None:
         node_colors = {}
-        for trip_time, color in zip(sorted(trip_times, reverse=True), iso_colors):
+        for trip_time, color in zip(sorted(self.trip_times, reverse=True), self.colors):
             subgraph = nx.ego_graph(G, center_node, radius=trip_time, distance="time")
             for node in subgraph.nodes():
                 node_colors[node] = color
