@@ -1,4 +1,5 @@
 import osmnx as ox
+from random import randrange
 
 class GraphBuilder:
     def __init__(self, place, transportation_mode, travel_speed):
@@ -28,5 +29,8 @@ class GraphBuilder:
             data["time"] = data["length"] / meters_per_minute
         
         return self.projected_graph
-        
-    
+
+    def get_random_node(self):
+        nodes = self.graph.nodes
+        random_index = randrange(len(nodes))
+        return nodes[random_index]
