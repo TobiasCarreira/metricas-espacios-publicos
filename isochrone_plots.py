@@ -2,7 +2,7 @@ import geopandas as gpd
 import osmnx as ox
 import networkx as nx
 import matplotlib.pyplot as plt
-
+from networkx.classes.multidigraph import MultiDiGraph
 from descartes import PolygonPatch
 from shapely.geometry import Point
 
