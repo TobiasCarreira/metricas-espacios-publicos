@@ -31,6 +31,6 @@ class GraphBuilder:
         return self.projected_graph
 
     def get_random_node(self):
-        nodes = self.graph.nodes
+        nodes = list(self.graph.nodes)
         random_index = randrange(len(nodes))
         return nodes[random_index]
