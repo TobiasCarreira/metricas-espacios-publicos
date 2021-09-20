@@ -20,7 +20,7 @@ class GraphBuilder:
         x, y = gdf_nodes["geometry"].unary_union.centroid.xy
         center_node = ox.distance.nearest_nodes(self.graph, x[0], y[0])
         return center_node
-        
+
     def initialize_projected_graph(self):
         self.projected_graph = ox.project_graph(self.graph)
         meters_per_minute = self.travel_speed * 1000 / 60  # km per hour to m per minute
@@ -34,3 +34,8 @@ class GraphBuilder:
         nodes = list(self.graph.nodes)
         random_index = randrange(len(nodes))
         return nodes[random_index]
+        
+    def nearest_nodes_to(self, coordinates_list):
+        longitudes = [coordinate[0] for coordinate in coordinates_list]
+        latitudes = [coordinate[1] for coordinate in coordinates_list]
+        return ox.distance.nearest_nodes(self.graph, longitudes, latitudes)
